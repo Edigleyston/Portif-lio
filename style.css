@@ -1,0 +1,235 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{/*root tambem serve para definir variaveis*/
+    --ff-heading: 'Epilogue', sans-serif; 
+    /*no caso --ff-heading é uma variavel q leva a fonte Epilogue*/
+    --ff-texting: 'Open sans', sans-serif;
+
+    /*HSL = hsla ( hue, saturation, lightness, alpha) podemos definir nas variaveis de cor
+    uma definição padrão para alterar em todo lugar que a variavel for chamada.
+    hue é a cor saturation a saturação da esquerda pra direita, e light a luz de baixo para cima
+    alpha é a opacidade, podemos tirar o alpha se quiser*/
+    --hue: 250;
+    
+    /*estou definindo uma variavel com background*/
+    --bg-primary: hsl(var(--hue), 22%, 20%); 
+    
+    /*variavel para cor da fonte*/
+    --fc-primary: hsl(var(---hue), 0%,, 100%);
+    --fc-secondary: hsl(var(--hue), 50%, 80%);
+    --fc-secundary-dark: hsl(var(--hue), 100%, 11%, 1);
+
+    font-size: 62.5%;
+    /*definindo variavel para o tamanho das fontes*/
+    --fs-body: 1.6rem;
+    --fs-heading: 4rem;
+}
+
+body{
+    font-family: var(--ff-texting);   /*aqui, estou puxando a variavel do root, a --ff-texting com o var();*/
+    
+    background: var(--bg-primary);
+    color: var(--fc-primary);
+
+    font-size: var(--fs-body);
+}
+
+
+.page{
+    max-width: 33rem;  
+   margin: 0 auto;
+}
+
+@media (min-width: 700px) {
+    :root{
+        font-size: 1.5rem;
+    }
+    .page{
+        max-width: 117rem;
+        padding: 0 5rem;
+    }
+}
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+header{
+    margin: 10rem 0 8rem;
+    font-family: var(--ff-heading);
+    text-align: center;
+}
+header p{
+    text-transform: uppercase;
+    color: var(--fc-secondary);
+
+    line-height: 3.2rem;
+    letter-spacing: 0.3rem;
+
+    font-weight: 400;
+
+    margin-bottom: 1.7rem;
+}
+header h1{
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 4.8rem;
+    color: var(--fc-secondary);
+}
+
+main{
+    display: grid;
+    gap: 3.2rem;
+}
+
+.card{
+    position: relative;
+    font-family: var(--ff-heading);
+
+}
+
+.card img{
+    height: 41.6rem;
+    object-fit: cover; /*o objeto irá se ajustar para cobrir
+    a area designada*/
+    border-radius: 6px;
+
+    transition: all 350ms ease-in-out;
+}
+
+.card img:hover{
+    transform: scale(1.1);
+
+    transition-delay: 200ms;
+
+    
+    opacity: 0.4;
+}
+
+
+.card h2{
+    position: absolute; /*absoluto em relação ao card relative*/
+    bottom: 5.2rem;
+    left: 2.8rem;
+
+    color: var(--fc-secondary);
+
+    font-size: var(--fs-heading);
+    font-weight: 800;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
+}
+
+.card h2 span{
+    border-radius: 2rem;
+    background-color: white;   
+    font-size: var(--fs-body);
+    font-weight: 400;
+    color: var(--fc-secundary-dark);
+    padding: 0 1.6rem;
+    height: 3.8rem;
+
+    /* fit-content vai alinhar com o conteudo*/
+    width: fit-content; 
+
+    transition: all 200ms;
+
+
+    /* display: inline-flex pq span n recebe height */
+    display: inline-flex; 
+    align-items: center;
+}
+.card h2 span:hover{
+    transform: scale(1.2);
+    transition-delay: 200ms;
+
+    font-weight: bold;
+    opacity: 8;
+    background: var(--fc-secondary);
+}
+
+/* AT-RULE  regra at (at-rule) é uma CSS statement iniciando com um caractere arroba,
+ '@' (U+0040 ARROBA COMERCIAL), seguido por um indetificador e
+  terminando no primeiro ponto e vírgula', ;' (U+003B SEMICOLON),
+   fora de um bloco, ou no fim do primeiro Bloco CSS. Exemplo: @media */
+
+    /*keyframes é algo como "ponto chave"*/
+   /*topdown é o nome da animação q eu dou*/
+@keyframes topdown{
+    0%{/*inicio da timeline, no ponto 0 ele faz algo*/
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    100%{/*fim da timeline, no ponto 100 faz algo*/
+        opacity: 1;
+        transform: translateY(0);
+    } /*no ponto 0 inicia com opacidade 0, desce 15px e qd chega no 100 fica opacity 1*/
+}
+
+@keyframes downtop {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes card-right{
+    0%{
+        opacity: 0;
+        transform: translateX(15px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes card-left{
+    0%{
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes card-right-2{
+    0%{
+        opacity: 0;
+        transform: translateX(15px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+header{
+    /*animation vai chamar uma at-rule de animação. no caso o topdown*/
+    animation: topdown 700ms;  
+
+}
+main{
+    animation: downtop 700ms 350ms backwards;
+}
+main .card:nth-child(1){
+    animation: card-right 900ms;
+}
+main .card:nth-child(2){
+    animation: card-left 1000ms;
+}
+main .card:nth-child(3){
+    animation: card-right-2 2000ms;
+}
+
